@@ -1,0 +1,94 @@
+.register-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #F2EDE2;
+  padding: 24px;
+  font-family: 'Poppins', 'Segoe UI', sans-serif;
+}
+
+.register-card {
+  width: 100%;
+  max-width: 420px;
+  background-color: #FFFFFF;
+  border-radius: 24px;
+  padding: 40px 32px;
+  box-shadow: 0 8px 30px rgba(22, 31, 54, 0.15);
+}
+
+.register-title {
+  color: #161F36;
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  margin: 0 0 32px;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.input-group {
+  width: 100%;
+}
+
+.input-group input {
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #BACBD8;
+  border: none;
+  border-bottom: 2px solid #161F36;
+  border-radius: 6px;
+  padding: 16px 14px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #161F36;
+  outline: none;
+}
+
+.input-group input::placeholder {
+  color: #161F36;
+  opacity: 0.75;
+  font-weight: 600;
+}
+
+.input-group input:focus {
+  border-bottom-color: #161F36;
+  background-color: #aebdc9;
+}
+
+.register-btn {
+  margin-top: 12px;
+  background: none;
+  border: none;
+  color: #161F36;
+  font-size: 1.05rem;
+  font-weight: 700;
+  text-align: center;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.register-btn:hover {
+  opacity: 0.7;
+}
+
+.login-text {
+  text-align: center;
+  color: #161F36;
+  font-weight: 600;
+  margin-top: 20px;
+}
+
+.login-link {
+  color: #161F36;
+  text-decoration: underline;
+  font-weight: 700;
+}
+
+.login-link:hover {
+  opacity: 0.7;
+}
