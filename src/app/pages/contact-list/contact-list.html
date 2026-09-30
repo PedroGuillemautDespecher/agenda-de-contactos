@@ -1,21 +1,24 @@
 <section class="contact-page">
   <div class="contact-header">
     <h1 class="contact-title">Mis contactos</h1>
-    <button class="add-btn" (click)="agregarContacto()">+ Agregar contacto</button>
+    <a class="add-btn" routerLink="/contacts/create">+ Agregar contacto</a>
   </div>
 
   <div class="contact-rows">
     @for (contacto of contactsService.contactList; track contacto.id) {
       <div class="contact-card">
         <a class="contact-link" [routerLink]="['/contacts', contacto.id]">
-          <img class="contact-photo" [src]="contacto.imgUrl" [alt]="contacto.nombre">
+          <img class="contact-photo" [src]="contacto.image" [alt]="contacto.firstName">
           <div class="contact-info">
-            <p class="contact-name">{{ contacto.nombre }} {{ contacto.apellido }}</p>
-            <p class="contact-detail">Tel: {{ contacto.numeroTelefono }}</p>
+            <p class="contact-name">{{ contacto.firstName }} {{ contacto.lastName }}</p>
+            <p class="contact-detail">Tel: {{ contacto.number }}</p>
             <p class="contact-detail">Mail: {{ contacto.email }}</p>
           </div>
         </a>
-        <button class="delete-btn" (click)="deleteContact(contacto.id)">Eliminar</button>
+        <div class="contact-actions">
+          <a class="edit-btn" [routerLink]="['/contacts', contacto.id, 'edit']">Editar</a>
+          <button class="delete-btn" (click)="deleteContact(contacto.id)">Eliminar</button>
+        </div>
       </div>
     }
   </div>

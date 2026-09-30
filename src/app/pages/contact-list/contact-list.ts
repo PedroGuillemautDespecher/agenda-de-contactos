@@ -14,10 +14,6 @@ export class ContactList {
 
   contactsService = inject(ContactsService);
 
-  agregarContacto() {
-    this.contactsService.agregarContacto();
-  }
-
   deleteContact(id: number) {
     this.contactsService.deleteContact(id);
     Swal.mixin({

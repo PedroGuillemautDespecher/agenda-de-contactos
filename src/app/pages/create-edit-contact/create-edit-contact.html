@@ -1,1 +1,23 @@
-<p>create-edit-contact works!</p>
+<section class="form-page">
+  <div class="form-card">
+    <h1 class="form-title">Nuevo contacto</h1>
+
+    <form class="contact-form" (submit)="onSubmit($event)">
+      <label for="nombre">Nombre</label>
+      <input type="text" [formField]="formCreateContact.firstName" id="nombre" />
+
+      <label for="apellido">Apellido</label>
+      <input type="text" [formField]="formCreateContact.lastName" id="apellido" />
+
+      <label for="email">Mail</label>
+      <input type="text" [formField]="formCreateContact.email" id="email" />
+
+      <label for="telefono">Numero de telefono</label>
+      <input type="text" [formField]="formCreateContact.number" id="telefono" />
+
+      <button class="submit-btn">Agregar contacto</button>
+    </form>
+
+    <a class="back-link" routerLink="/contacts">Volver</a>
+  </div>
+</section>

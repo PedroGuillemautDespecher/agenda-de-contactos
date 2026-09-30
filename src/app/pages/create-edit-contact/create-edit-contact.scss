@@ -1,0 +1,63 @@
+.form-page {
+  min-height: 100vh;
+  background-color: #F2EDE2;
+  padding: 40px 24px;
+  font-family: 'Poppins', 'Segoe UI', sans-serif;
+}
+
+.form-card {
+  max-width: 420px;
+  margin: 0 auto;
+  background-color: #FFFFFF;
+  border: 1px solid #161F36;
+  padding: 24px;
+}
+
+.form-title {
+  color: #161F36;
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 0 0 20px;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-form label {
+  color: #161F36;
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.contact-form input {
+  background-color: #BACBD8;
+  color: #161F36;
+  border: 1px solid #161F36;
+  padding: 8px 10px;
+  font-size: 0.9rem;
+  margin-bottom: 16px;
+}
+
+.submit-btn {
+  background-color: #161F36;
+  color: #FFFFFF;
+  border: none;
+  padding: 10px 18px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.submit-btn:hover {
+  opacity: 0.85;
+}
+
+.back-link {
+  display: inline-block;
+  margin-top: 16px;
+  color: #161F36;
+  font-size: 0.85rem;
+}

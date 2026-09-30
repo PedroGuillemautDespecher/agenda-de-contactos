@@ -11,29 +11,25 @@ export const routes: Routes = [
         redirectTo: 'login',
         pathMatch: 'full'
     },{
-        path:"login",
+        path: "login",
         component: Login
     },{
-        path:"register",
-        component: Register,  
+        path: "register",
+        component: Register
     },{
-        path:"contacts",
+        path: "contacts",
         component: ContactList
     },{
-        path:"contacts/create",
+        path: "contacts/create",
         component: CreateEditContact
     },{
-        path:"contacts/:id",
+        path: "contacts/:id",
         component: ContactDetails
     },{
-        path:"contacts/:id/edit",
+        path: "contacts/:id/edit",
         component: CreateEditContact
-
-    },
-    {
-        path: "",
-        redirectTo: "contacts",
-        pathMatch: "full"
-
+    },{
+        path: '**',
+        redirectTo: 'login'
     }
 ];

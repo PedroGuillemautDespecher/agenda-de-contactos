@@ -1,5 +1,7 @@
-import { Component, inject } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { Component, inject, input, OnInit } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { ContactsService } from '../../services/contactsService';
+import { Contact } from '../../interfaces/contact';
 
 @Component({
   imports: [RouterLink],
@@ -7,7 +9,13 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
   styleUrl: './contact-details.scss',
   templateUrl: './contact-details.html',
 })
-export class ContactDetails {
-  route = inject(ActivatedRoute);
-  id = this.route.snapshot.paramMap.get('id');
+export class ContactDetails implements OnInit {
+
+  id = input.required<string>();
+  contacto: Contact | undefined;
+  contactsService = inject(ContactsService);
+
+  ngOnInit(): void {
+    this.contacto = this.contactsService.getContactById(Number(this.id()));
+  }
 }

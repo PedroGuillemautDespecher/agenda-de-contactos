@@ -21,6 +21,8 @@
 }
 
 .add-btn {
+  display: inline-block;
+  text-decoration: none;
   background-color: #161F36;
   color: #FFFFFF;
   border: none;
@@ -109,4 +111,25 @@
 
 .delete-btn:hover {
   background-color: #BACBD8;
+}
+
+.contact-actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.edit-btn {
+  background-color: #BACBD8;
+  color: #161F36;
+  border: 1px solid #161F36;
+  padding: 8px 14px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.edit-btn:hover {
+  background-color: #FFFFFF;
 }
