@@ -10,7 +10,7 @@ export class Auth {
       method: "POST",
       headers: {
         "content-type": "application/json"
-      },
+      },  
       body: JSON.stringify({
         email: loginData.email,
         password: loginData.password
