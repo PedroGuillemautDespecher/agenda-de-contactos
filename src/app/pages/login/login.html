@@ -12,7 +12,7 @@
               <input type="password" [formField]="formLogin.password" id="password" placeholder="Contraseña*">
             </div>
       
-            <button type="submit" class="login-btn">Login</button>
+            <button type="submit" class="login-btn" [disabled]="formLogin().invalid()">Login</button>
           </form>
       
           <p class="register-text">

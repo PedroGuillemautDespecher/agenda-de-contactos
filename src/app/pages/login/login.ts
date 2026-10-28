@@ -1,7 +1,8 @@
-import { Component, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
-import { form, FormField, required, email } from '@angular/forms/signals';
+import { Component, inject, signal } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
+import { form, FormField, required, email, minLength } from '@angular/forms/signals';
 import { LoginForm } from '../../interfaces/login';
+import { Auth } from '../../services/auth';
 
 @Component({
   imports: [RouterLink, FormField],
@@ -10,6 +11,9 @@ import { LoginForm } from '../../interfaces/login';
   templateUrl: './login.html',
 })
 export class Login {
+
+  authService = inject(Auth);
+  router = inject(Router);
 
   loginModel = signal<LoginForm>({
     email: '',
@@ -20,9 +24,17 @@ export class Login {
     required(schemaPath.email);
     email(schemaPath.email);
     required(schemaPath.password);
+    minLength(schemaPath.password, 8);
   });
 
-  login(event: Event) {
+  async login(event: Event) {
     event.preventDefault();
+
+    const result = await this.authService.login(this.loginModel());
+    if (result) {
+      this.router.navigate(["/"]);
+    } else {
+      console.warn("ERROR");
+    }
   }
 }

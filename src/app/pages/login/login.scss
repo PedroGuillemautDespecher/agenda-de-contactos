@@ -75,6 +75,11 @@
   .login-btn:hover {
     opacity: 0.7;
   }
+
+  .login-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
   
   .register-text {
     text-align: center;

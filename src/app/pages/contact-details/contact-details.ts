@@ -1,4 +1,4 @@
-import { Component, inject, input, OnInit } from '@angular/core';
+import { Component, inject, input, OnInit, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ContactsService } from '../../services/contactsService';
 import { Contact } from '../../interfaces/contact';
@@ -12,10 +12,12 @@ import { Contact } from '../../interfaces/contact';
 export class ContactDetails implements OnInit {
 
   id = input.required<string>();
-  contacto: Contact | undefined;
+  contacto = signal<Contact | undefined>(undefined);
+  cargando = signal(true);
   contactsService = inject(ContactsService);
 
-  ngOnInit(): void {
-    this.contacto = this.contactsService.getContactById(Number(this.id()));
+  async ngOnInit() {
+    this.contacto.set(await this.contactsService.getContactById(Number(this.id())));
+    this.cargando.set(false);
   }
 }

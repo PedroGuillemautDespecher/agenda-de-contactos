@@ -1,9 +1,15 @@
 <section class="details-page">
   <div class="details-card">
-    <p class="details-id">ID: {{ id() }}</p>
-    <p class="details-detail">{{ contacto?.firstName }} {{ contacto?.lastName }}</p>
-    <p class="details-detail">Telefono: {{ contacto?.number }}</p>
-    <p class="details-detail">Mail: {{ contacto?.email }}</p>
+    @if (cargando()) {
+      <p class="details-detail">Cargando contacto...</p>
+    } @else if (contacto()) {
+      <p class="details-id">ID: {{ id() }}</p>
+      <p class="details-detail">{{ contacto()?.firstName }} {{ contacto()?.lastName }}</p>
+      <p class="details-detail">Telefono: {{ contacto()?.number }}</p>
+      <p class="details-detail">Mail: {{ contacto()?.email }}</p>
+    } @else {
+      <p class="details-detail">No se encontró el contacto.</p>
+    }
 
     <a class="back-link" routerLink="/contacts">Volver</a>
   </div>

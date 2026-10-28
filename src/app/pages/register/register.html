@@ -2,20 +2,35 @@
   <div class="register-card">
     <h1 class="register-title">Crear cuenta</h1>
 
-    <form class="register-form">
+    <form class="register-form" (submit)="register($event)">
       <div class="input-group">
-        <input type="text" id="nombre" name="nombre" placeholder="Nombre completo*" required>
+        <input type="text" id="firstName" [formField]="formRegister.firstName" placeholder="Nombre*">
       </div>
 
       <div class="input-group">
-        <input type="email" id="email" name="email" placeholder="Correo electrónico*" required>
+        <input type="text" id="lastName" [formField]="formRegister.lastName" placeholder="Apellido*">
       </div>
 
       <div class="input-group">
-        <input type="password" id="password" name="password" placeholder="Contraseña*" required>
+        <input type="email" id="email" [formField]="formRegister.email" placeholder="Correo electrónico*">
       </div>
 
-      <button type="submit" class="register-btn">Registrarme</button>
+      <div class="input-group">
+        <input type="password" id="password" [formField]="formRegister.password" placeholder="Contraseña* (mínimo 8 caracteres)">
+      </div>
+
+      <div class="input-group">
+        <input type="password" id="confirmPassword" [formField]="formRegister.confirmPassword" placeholder="Repetir contraseña*">
+        @if (formRegister.confirmPassword().invalid()) {
+          <p class="error-text">Las contraseñas no coinciden</p>
+        }
+      </div>
+
+      @if (mensajeError()) {
+        <p class="error-text">{{ mensajeError() }}</p>
+      }
+
+      <button type="submit" class="register-btn" [disabled]="formRegister().invalid()">Registrarme</button>
     </form>
 
     <p class="login-text">

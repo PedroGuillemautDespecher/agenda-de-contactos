@@ -92,3 +92,16 @@
 .login-link:hover {
   opacity: 0.7;
 }
+
+.register-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.error-text {
+  color: #161F36;
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-style: italic;
+  margin-top: 6px;
+}

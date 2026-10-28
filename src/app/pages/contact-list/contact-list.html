@@ -1,14 +1,17 @@
 <section class="contact-page">
   <div class="contact-header">
     <h1 class="contact-title">Mis contactos</h1>
-    <a class="add-btn" routerLink="/contacts/create">+ Agregar contacto</a>
+    <div class="header-actions">
+      <a class="add-btn" routerLink="/contacts/create">+ Agregar contacto</a>
+      <button class="logout-btn" (click)="authService.logout()">Cerrar sesión</button>
+    </div>
   </div>
 
   <div class="contact-rows">
-    @for (contacto of contactsService.contactList; track contacto.id) {
+    @for (contacto of contactsService.contactList(); track contacto.id) {
       <div class="contact-card">
         <a class="contact-link" [routerLink]="['/contacts', contacto.id]">
-          <img class="contact-photo" [src]="contacto.image" [alt]="contacto.firstName">
+          <img class="contact-photo" [src]="contacto.image || 'https://ui-avatars.com/api/?name=' + contacto.firstName + '+' + contacto.lastName + '&background=BACBD8&color=161F36'" [alt]="contacto.firstName">
           <div class="contact-info">
             <p class="contact-name">{{ contacto.firstName }} {{ contacto.lastName }}</p>
             <p class="contact-detail">Tel: {{ contacto.number }}</p>
