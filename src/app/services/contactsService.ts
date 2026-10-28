@@ -23,18 +23,26 @@ export class ContactsService {
     return contactos;
   }
 
-  // Por ahora agregar y eliminar siguen trabajando sobre la lista local (todavía no llaman al back)
-  agregarContacto(nuevoContacto: Contact) {
-    const nuevoId = Date.now();
-    this.contactList.update(lista => [...lista, {
-      id: nuevoId,
-      firstName: nuevoContacto.firstName,
-      lastName: nuevoContacto.lastName,
-      email: nuevoContacto.email,
-      number: nuevoContacto.number,
-      image: 'https://ui-avatars.com/api/?name=' + nuevoContacto.firstName + '+' + nuevoContacto.lastName + '&background=BACBD8&color=161F36'
-    }]);
-    return nuevoId;
+  // Crea el contacto en el back y lo suma a la lista con el id real que devuelve
+  async agregarContacto(nuevoContacto: Contact): Promise<number | undefined> {
+    const res = await fetch("http://localhost:5000/api/contacts", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        Authorization: "Bearer " + this.authService.token
+      },
+      body: JSON.stringify({
+        firstName: nuevoContacto.firstName,
+        lastName: nuevoContacto.lastName,
+        email: nuevoContacto.email,
+        number: nuevoContacto.number,
+        image: nuevoContacto.image || 'https://ui-avatars.com/api/?name=' + nuevoContacto.firstName + '+' + nuevoContacto.lastName + '&background=BACBD8&color=161F36'
+      })
+    });
+    if (!res.ok) return undefined;
+    const contactoCreado: Contact = await res.json();
+    this.contactList.update(lista => [...lista, contactoCreado]);
+    return contactoCreado.id;
   }
 
   // Trae un contacto puntual del back a partir de su id
@@ -50,6 +58,7 @@ export class ContactsService {
     return contacto;
   }
 
+  // Por ahora eliminar sigue trabajando sobre la lista local (todavía no llama al back)
   deleteContact(id: number) {
     this.contactList.update(lista => lista.filter(contacto => contacto.id !== id));
   }

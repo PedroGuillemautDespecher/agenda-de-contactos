@@ -15,7 +15,7 @@
       <label for="telefono">Numero de telefono</label>
       <input type="text" [formField]="formCreateContact.number!" id="telefono" />
 
-      <button class="submit-btn">Agregar contacto</button>
+      <button class="submit-btn" [disabled]="formCreateContact().invalid()">Agregar contacto</button>
     </form>
 
     <a class="back-link" routerLink="/contacts">Volver</a>
