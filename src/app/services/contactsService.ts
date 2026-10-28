@@ -31,6 +31,7 @@ export class ContactsService {
         "content-type": "application/json",
         Authorization: "Bearer " + this.authService.token
       },
+      // Avatar con iniciales cuando no hay imagen. Referencia: https://ui-avatars.com/
       body: JSON.stringify({
         firstName: nuevoContacto.firstName,
         lastName: nuevoContacto.lastName,
@@ -79,8 +80,16 @@ export class ContactsService {
     return true;
   }
 
-  // Por ahora eliminar sigue trabajando sobre la lista local (todavía no llama al back)
-  deleteContact(id: number) {
+  // Borra el contacto en el back y lo saca de la lista (el back responde 204, sin contenido)
+  async deleteContact(id: number): Promise<boolean> {
+    const res = await fetch("http://localhost:5000/api/contacts/" + id, {
+      method: "DELETE",
+      headers: {
+        Authorization: "Bearer " + this.authService.token
+      }
+    });
+    if (!res.ok) return false;
     this.contactList.update(lista => lista.filter(contacto => contacto.id !== id));
+    return true;
   }
 }

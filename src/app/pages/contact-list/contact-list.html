@@ -1,16 +1,17 @@
 <section class="contact-page">
-  <div class="contact-header">
+  <header class="contact-header">
     <h1 class="contact-title">Mis contactos</h1>
     <div class="header-actions">
       <a class="add-btn" routerLink="/contacts/create">+ Agregar contacto</a>
       <button class="logout-btn" (click)="authService.logout()">Cerrar sesión</button>
     </div>
-  </div>
+  </header>
 
   <div class="contact-rows">
     @for (contacto of contactsService.contactList(); track contacto.id) {
-      <div class="contact-card">
+      <article class="contact-card">
         <a class="contact-link" [routerLink]="['/contacts', contacto.id]">
+          <!-- Avatar con iniciales cuando no hay imagen. Referencia: https://ui-avatars.com/ -->
           <img class="contact-photo" [src]="contacto.image || 'https://ui-avatars.com/api/?name=' + contacto.firstName + '+' + contacto.lastName + '&background=BACBD8&color=161F36'" [alt]="contacto.firstName">
           <div class="contact-info">
             <p class="contact-name">{{ contacto.firstName }} {{ contacto.lastName }}</p>
@@ -22,7 +23,7 @@
           <a class="edit-btn" [routerLink]="['/contacts', contacto.id, 'edit']">Editar</a>
           <button class="delete-btn" (click)="deleteContact(contacto.id)">Eliminar</button>
         </div>
-      </div>
+      </article>
     }
   </div>
 </section>

@@ -20,8 +20,8 @@ export class ContactList implements OnInit {
     this.contactsService.getContacts();
   }
 
-  deleteContact(id: number) {
-    this.contactsService.deleteContact(id);
+  async deleteContact(id: number) {
+    const eliminado = await this.contactsService.deleteContact(id);
     Swal.mixin({
       toast: true,
       position: "top-end",
@@ -33,8 +33,8 @@ export class ContactList implements OnInit {
         toast.onmouseleave = Swal.resumeTimer;
       }
     }).fire({
-      icon: "success",
-      title: "Eliminated Succesfully"
+      icon: eliminado ? "success" : "error",
+      title: eliminado ? "Contacto eliminado" : "No se pudo eliminar el contacto"
     });
   }
 }
