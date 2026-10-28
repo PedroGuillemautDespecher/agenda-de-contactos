@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, input, OnInit, signal } from '@angular/core';
 import { form, FormField, required } from '@angular/forms/signals';
 import { Router, RouterLink } from '@angular/router';
 import { ContactsService } from '../../services/contactsService';
@@ -11,7 +11,9 @@ import Swal from 'sweetalert2';
   styleUrl: './create-edit-contact.scss',
   templateUrl: './create-edit-contact.html',
 })
-export class CreateEditContact {
+export class CreateEditContact implements OnInit {
+
+  id = input<string>();
 
   contactsService = inject(ContactsService);
   router = inject(Router);
@@ -29,8 +31,46 @@ export class CreateEditContact {
     required(schemaPath.firstName);
   });
 
+  // Si la URL trae un id, es una edición: trae el contacto del back y precarga el formulario
+  async ngOnInit() {
+    if (this.id()) {
+      const contacto = await this.contactsService.getContactById(Number(this.id()));
+      if (contacto) {
+        this.newContactModel.set({
+          id: contacto.id,
+          firstName: contacto.firstName,
+          lastName: contacto.lastName || '',
+          email: contacto.email || '',
+          number: contacto.number || '',
+          image: contacto.image || ''
+        });
+      }
+    }
+  }
+
   async onSubmit(event: Event) {
     event.preventDefault();
+
+    if (this.id()) {
+      const editado = await this.contactsService.editarContacto(this.newContactModel());
+
+      Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true
+      }).fire({
+        icon: editado ? "success" : "error",
+        title: editado ? "Contacto editado" : "No se pudo editar el contacto"
+      });
+
+      if (editado) {
+        this.router.navigate(['/contacts', this.id()]);
+      }
+      return;
+    }
+
     const idContactoCreado = await this.contactsService.agregarContacto(this.newContactModel());
 
     if (!idContactoCreado) {

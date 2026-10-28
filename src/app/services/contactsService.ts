@@ -58,6 +58,27 @@ export class ContactsService {
     return contacto;
   }
 
+  // Manda los cambios de un contacto al back y lo reemplaza en la lista (el back responde 204, sin contenido)
+  async editarContacto(contactoEditado: Contact): Promise<boolean> {
+    const res = await fetch("http://localhost:5000/api/contacts/" + contactoEditado.id, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+        Authorization: "Bearer " + this.authService.token
+      },
+      body: JSON.stringify({
+        firstName: contactoEditado.firstName,
+        lastName: contactoEditado.lastName,
+        email: contactoEditado.email,
+        number: contactoEditado.number,
+        image: contactoEditado.image
+      })
+    });
+    if (!res.ok) return false;
+    this.contactList.update(lista => lista.map(contacto => contacto.id === contactoEditado.id ? contactoEditado : contacto));
+    return true;
+  }
+
   // Por ahora eliminar sigue trabajando sobre la lista local (todavía no llama al back)
   deleteContact(id: number) {
     this.contactList.update(lista => lista.filter(contacto => contacto.id !== id));

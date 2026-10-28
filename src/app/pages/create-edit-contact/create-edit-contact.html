@@ -1,6 +1,6 @@
 <section class="form-page">
   <div class="form-card">
-    <h1 class="form-title">Nuevo contacto</h1>
+    <h1 class="form-title">{{ id() ? 'Editar contacto' : 'Nuevo contacto' }}</h1>
 
     <form class="contact-form" (submit)="onSubmit($event)">
       <label for="nombre">Nombre</label>
@@ -15,7 +15,7 @@
       <label for="telefono">Numero de telefono</label>
       <input type="text" [formField]="formCreateContact.number!" id="telefono" />
 
-      <button class="submit-btn" [disabled]="formCreateContact().invalid()">Agregar contacto</button>
+      <button class="submit-btn" [disabled]="formCreateContact().invalid()">{{ id() ? 'Guardar cambios' : 'Agregar contacto' }}</button>
     </form>
 
     <a class="back-link" routerLink="/contacts">Volver</a>
